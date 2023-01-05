@@ -5,7 +5,7 @@ using UnityEngine;
 public class ExtendBody : MonoBehaviour
 {
     public GameObject lastSegment;
-    public Transform tail;
+    public GameObject tail;
     public GameObject bodySegmentPrefab;
     public Transform parentBody;
 
@@ -19,13 +19,19 @@ public class ExtendBody : MonoBehaviour
             parentBody
         );
 
-        //Swap the SpringJoint in the previous segment to hold the new one
+        //Swap the spring joint in the previous segment to hold the new one
         SpringJoint lastSpring = (lastSegment.GetComponent(typeof(SpringJoint)) as SpringJoint);
         lastSpring.connectedBody = (newSegment.GetComponent(typeof(Rigidbody)) as Rigidbody);
         Vector3 connector = lastSpring.connectedAnchor;
         connector.y = 1;
         lastSpring.connectedAnchor = connector;
 
-        
+        //Move tail backwards and connect new segment's spring joint to it
+        tail.transform.position += (lastSegment.transform.up * -2);
+        SpringJoint newSpring = (newSegment.GetComponent(typeof(SpringJoint)) as SpringJoint);
+        newSpring.connectedBody = (tail.GetComponent(typeof(Rigidbody)) as Rigidbody);
+
+        //Change reference to lastSegment so we can recurse this process
+        //lastSegment = newSegment;
     }
 }
