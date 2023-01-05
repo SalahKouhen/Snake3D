@@ -9,14 +9,19 @@ public class HeadMovement : MonoBehaviour
     private Vector3 mouseFirstPos;
     private Vector3 mouseOffset;
     private bool firstClickFlag;
+    private float dragSensitivity = 0.1f;
 
     [Header("pitching, yaw and roll")]
-    public Vector3 turnTorque = new Vector3(90f, 25f, 45f);
+    public Vector3 turnTorque = new Vector3(90f, 25f, 5f);
     private Rigidbody rb;
     public float yaw;
     public float pitch;
+    public float roll;
     public float forceMult = 1f;
-    private float dragFactor = 10f;
+    private float dragFactor = 12;
+
+    [Header("forward movement")]
+    private float thrust = 10f;
 
 
     void Start()
@@ -35,7 +40,7 @@ public class HeadMovement : MonoBehaviour
                 mouseFirstPos = Input.mousePosition;
                 firstClickFlag = false;
             }
-            mouseOffset = Input.mousePosition - mouseFirstPos;
+            mouseOffset = (Input.mousePosition - mouseFirstPos)*dragSensitivity;
             Debug.Log(mouseOffset.x);
 
         }
@@ -48,13 +53,16 @@ public class HeadMovement : MonoBehaviour
 
         yaw = mouseOffset.x;
         pitch = mouseOffset.y;
+        roll = transform.right.y;
+
+        rb.velocity = thrust * transform.forward;
     }
 
     void FixedUpdate()
     {
         rb.AddRelativeTorque(new Vector3(-turnTorque.x * pitch,
                                                 turnTorque.y * yaw,
-                                                -turnTorque.z * 0f) * forceMult,
+                                                -turnTorque.z * roll) * forceMult,
                                     ForceMode.Force);
         //damp the rotation
         rb.AddTorque(-rb.angularVelocity * dragFactor);
