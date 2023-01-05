@@ -28,19 +28,25 @@ public class HeadMovement : MonoBehaviour
     private bool gameOver;
     private bool deathMoment;
 
+    [Header("Head chases flocks at start of game but slower")]
+    public GameObject gamecontrollerobj;
+    private GameController gameController;
+    private bool startScreen;
 
     void Start()
     {
         firstClickFlag = true;
         rb = GetComponent<Rigidbody>();
         death = GetComponent<Death>();
+        gameController = gamecontrollerobj.GetComponent<GameController>();
         deathMoment = true;
     }
     void Update()
     {
         gameOver = death.gameOver;
+        startScreen = gameController.startScreen;
 
-        if (!gameOver)
+        if (!gameOver && !startScreen)
         {
             //Debug.Log(firstClickFlag);
             if (Input.GetMouseButton(0))
@@ -70,7 +76,7 @@ public class HeadMovement : MonoBehaviour
 
             rb.velocity = thrust * transform.forward;
         }
-        else
+        else if(gameOver)
         {
             if (deathMoment)
             {
@@ -84,10 +90,33 @@ public class HeadMovement : MonoBehaviour
                 {
                     count += 1;
                     go.GetComponent<Rigidbody>().useGravity = true;
-                    Debug.Log(count);
                 }
                 deathMoment = false;
             }
+        }
+        else if (startScreen)
+        {
+            // move towards the center of the flock by looking towards it
+            Collider[] farbyCo = Physics.OverlapSphere(transform.position, 30f);
+            Vector3 flockCtr = new Vector3(0f, 0f, 0f);
+            Vector3 flockVel = new Vector3(0f, 0f, 0f);
+            int flockSize = 0;
+            foreach (var co in farbyCo)
+            {
+                if (co.tag == "SnakeFood")
+                {
+                    flockCtr += co.gameObject.transform.position;
+                    flockSize += 1;
+                }
+            }
+
+            flockCtr = flockCtr / flockSize;
+
+            rb.velocity = thrust/2f * transform.forward;
+
+            var lookpos = flockCtr;
+            var rotation = Quaternion.LookRotation(lookpos);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * 10f);
         }
     }
 
