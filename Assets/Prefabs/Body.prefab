@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 5698970170417235438}
   m_Layer: 0
   m_Name: Tail
-  m_TagString: Untagged
+  m_TagString: Body
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -205,6 +205,10 @@ PrefabInstance:
     - target: {fileID: 7404164431366477062, guid: 0fb8e40d846157b4587f5233a2bbda74, type: 3}
       propertyPath: m_Name
       value: BodySegment
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404164431366477062, guid: 0fb8e40d846157b4587f5233a2bbda74, type: 3}
+      propertyPath: m_TagString
+      value: Body
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fb8e40d846157b4587f5233a2bbda74, type: 3}
