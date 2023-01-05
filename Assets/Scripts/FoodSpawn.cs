@@ -29,6 +29,6 @@ public class FoodSpawn : MonoBehaviour
 
     Vector3 randomSpawn()
     {
-        return new Vector3(Mathf.Ceil(Random.Range(-49, 43)), Mathf.Ceil(Random.Range(3, 87)), Mathf.Ceil(Random.Range(-49, 43)));
+        return new Vector3(Mathf.Ceil(Random.Range(-10, 10)), Mathf.Ceil(Random.Range(-10, 10)), Mathf.Ceil(Random.Range(-10, 10))) + 10f * Vector3.back;
     }
 }

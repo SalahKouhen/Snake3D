@@ -258,6 +258,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 382496088}
   m_CullTransparentMesh: 1
+--- !u!1 &383437458 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5698970170263363709, guid: 7f265b05c6cfbcd43aa1c80f09a74e4a, type: 3}
+  m_PrefabInstance: {fileID: 1436552271}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &574761408
 GameObject:
   m_ObjectHideFlags: 0
@@ -740,8 +745,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b85c5cbd7399d4d4f958adc66324f995, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  food: {fileID: 1950164976041182831, guid: cded7be31dcb2eb49a0423e807e4c734, type: 3}
-  foodConst: 100
+  food: {fileID: 5999094622697554409, guid: 007ab98741b2f8d4885c8fab7e218a83, type: 3}
+  foodConst: 45
   foodNum: 0
 --- !u!1 &963194225
 GameObject:
@@ -1694,6 +1699,10 @@ PrefabInstance:
       propertyPath: m_ConnectedBody
       value: 
       objectReference: {fileID: 1436552272}
+    - target: {fileID: 6419009975743193147, guid: 7df593c552ee8da4db98a5704599fc71, type: 3}
+      propertyPath: body
+      value: 
+      objectReference: {fileID: 383437458}
     - target: {fileID: 6419009975743193147, guid: 7df593c552ee8da4db98a5704599fc71, type: 3}
       propertyPath: scoreGame
       value: 

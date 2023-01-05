@@ -36,7 +36,7 @@ public class Flee : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(1f);
 
             //they always try to move forward a bit
             //rb.velocity += randomDir();
