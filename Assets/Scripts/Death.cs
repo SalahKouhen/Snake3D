@@ -19,7 +19,7 @@ public class Death : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "body" || collision.gameObject.tag == "bound")
+        if(collision.gameObject.tag == "Body" || collision.gameObject.tag == "Bound")
         {
             gameOver = true;
         }
