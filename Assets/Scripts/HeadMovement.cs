@@ -26,6 +26,7 @@ public class HeadMovement : MonoBehaviour
     [Header("game over stuff")]
     private Death death;
     private bool gameOver;
+    private bool deathMoment;
 
 
     void Start()
@@ -33,6 +34,7 @@ public class HeadMovement : MonoBehaviour
         firstClickFlag = true;
         rb = GetComponent<Rigidbody>();
         death = GetComponent<Death>();
+        deathMoment = true;
     }
     void Update()
     {
@@ -70,11 +72,23 @@ public class HeadMovement : MonoBehaviour
         }
         else
         {
-            rb.velocity = 0 * transform.forward;
-            rb.useGravity = true;
-            // add bit here to turn on gravity for whole body so it ragdolls
+            if (deathMoment)
+            {
+                rb.velocity = 0 * transform.forward;
+                rb.useGravity = true;
+                // turns on gravity for whole body so it ragdolls
+                GameObject[] snakeBody;
+                snakeBody = GameObject.FindGameObjectsWithTag("Body");
+                var count = 0;
+                foreach (GameObject go in snakeBody)
+                {
+                    count += 1;
+                    go.GetComponent<Rigidbody>().useGravity = true;
+                    Debug.Log(count);
+                }
+                deathMoment = false;
+            }
         }
-        
     }
 
     void FixedUpdate()
