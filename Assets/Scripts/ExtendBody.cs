@@ -9,6 +9,14 @@ public class ExtendBody : MonoBehaviour
     public GameObject bodySegmentPrefab;
     public Transform parentBody;
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            ExtendSnake();
+        }
+    }
+
     public void ExtendSnake()
     {
         GameObject newSegment = Instantiate
@@ -32,6 +40,6 @@ public class ExtendBody : MonoBehaviour
         newSpring.connectedBody = (tail.GetComponent(typeof(Rigidbody)) as Rigidbody);
 
         //Change reference to lastSegment so we can recurse this process
-        //lastSegment = newSegment;
+        lastSegment = newSegment;
     }
 }
