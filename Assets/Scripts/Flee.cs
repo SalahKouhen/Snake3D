@@ -85,7 +85,7 @@ public class Flee : MonoBehaviour
 
 
 
-            rb.velocity = 9f * rb.velocity.normalized;
+            rb.velocity = 8f * rb.velocity.normalized;
         }
     }
 
