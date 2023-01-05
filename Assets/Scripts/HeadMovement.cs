@@ -41,7 +41,7 @@ public class HeadMovement : MonoBehaviour
                 firstClickFlag = false;
             }
             mouseOffset = (Input.mousePosition - mouseFirstPos)/dragSensitivity;
-            Debug.Log(mouseOffset.x);
+            //Debug.Log(mouseOffset.x);
 
         }
         else
