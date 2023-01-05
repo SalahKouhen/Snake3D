@@ -294,14 +294,27 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.4070001, z: -3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.013962198, y: -0, z: -0, w: 0.9999026}
+  m_LocalPosition: {x: 0, y: 2.007, z: -4}
+  m_LocalScale: {x: 1, y: 1.0070167, z: 0.9992984}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 1.6, y: 0, z: 0}
+--- !u!114 &963194229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963194225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06ac2c86ab36b444bb02f4d17cc9ad19, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  head: {fileID: 1774117773}
 --- !u!1 &1774117773
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +446,7 @@ MonoBehaviour:
   turnTorque: {x: 90, y: 25, z: 45}
   yaw: 0
   pitch: 0
+  roll: 0
   forceMult: 1
 --- !u!1 &1899221182
 GameObject:

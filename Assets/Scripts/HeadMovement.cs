@@ -9,7 +9,7 @@ public class HeadMovement : MonoBehaviour
     private Vector3 mouseFirstPos;
     private Vector3 mouseOffset;
     private bool firstClickFlag;
-    private float dragSensitivity = 0.1f;
+    private float dragSensitivity = 1000f;
 
     [Header("pitching, yaw and roll")]
     public Vector3 turnTorque = new Vector3(90f, 25f, 5f);
@@ -18,7 +18,7 @@ public class HeadMovement : MonoBehaviour
     public float pitch;
     public float roll;
     public float forceMult = 1f;
-    private float dragFactor = 12;
+    private float dragFactor = 1f;
 
     [Header("forward movement")]
     private float thrust = 10f;
@@ -40,7 +40,7 @@ public class HeadMovement : MonoBehaviour
                 mouseFirstPos = Input.mousePosition;
                 firstClickFlag = false;
             }
-            mouseOffset = (Input.mousePosition - mouseFirstPos)*dragSensitivity;
+            mouseOffset = (Input.mousePosition - mouseFirstPos)/dragSensitivity;
             Debug.Log(mouseOffset.x);
 
         }
@@ -53,7 +53,10 @@ public class HeadMovement : MonoBehaviour
 
         yaw = mouseOffset.x;
         pitch = mouseOffset.y;
-        roll = transform.right.y;
+        var agressiveRoll = Mathf.Clamp(mouseOffset.x, -1f, 1f);
+        var wingsLevelRoll = transform.right.y;
+        var wingsLevelInfluence = Mathf.InverseLerp(0f, 10f, 0.01f);
+        roll = Mathf.Lerp(wingsLevelRoll, agressiveRoll, wingsLevelInfluence);
 
         rb.velocity = thrust * transform.forward;
     }
