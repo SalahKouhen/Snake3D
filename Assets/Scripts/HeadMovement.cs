@@ -23,42 +23,58 @@ public class HeadMovement : MonoBehaviour
     [Header("forward movement")]
     private float thrust = 10f;
 
+    [Header("game over stuff")]
+    private Death death;
+    private bool gameOver;
+
 
     void Start()
     {
         firstClickFlag = true;
         rb = GetComponent<Rigidbody>();
-
+        death = GetComponent<Death>();
     }
     void Update()
     {
-        //Debug.Log(firstClickFlag);
-        if (Input.GetMouseButton(0))
-        {
-            if (firstClickFlag)
-            {
-                mouseFirstPos = Input.mousePosition;
-                firstClickFlag = false;
-            }
-            mouseOffset = (Input.mousePosition - mouseFirstPos)/dragSensitivity;
-            //Debug.Log(mouseOffset.x);
+        gameOver = death.gameOver;
 
+        if (!gameOver)
+        {
+            //Debug.Log(firstClickFlag);
+            if (Input.GetMouseButton(0))
+            {
+                if (firstClickFlag)
+                {
+                    mouseFirstPos = Input.mousePosition;
+                    firstClickFlag = false;
+                }
+                mouseOffset = (Input.mousePosition - mouseFirstPos) / dragSensitivity;
+                //Debug.Log(mouseOffset.x);
+
+            }
+            else
+            {
+                firstClickFlag = true;
+                mouseOffset.x = 0f;
+                mouseOffset.y = 0f;
+            }
+
+            yaw = mouseOffset.x;
+            pitch = mouseOffset.y;
+            var agressiveRoll = Mathf.Clamp(mouseOffset.x, -1f, 1f);
+            var wingsLevelRoll = transform.right.y;
+            var wingsLevelInfluence = Mathf.InverseLerp(0f, 10f, 0.01f);
+            roll = Mathf.Lerp(wingsLevelRoll, agressiveRoll, wingsLevelInfluence);
+
+            rb.velocity = thrust * transform.forward;
         }
         else
         {
-            firstClickFlag = true;
-            mouseOffset.x = 0f;
-            mouseOffset.y = 0f;
+            rb.velocity = 0 * transform.forward;
+            rb.useGravity = true;
+            // add bit here to turn on gravity for whole body so it ragdolls
         }
-
-        yaw = mouseOffset.x;
-        pitch = mouseOffset.y;
-        var agressiveRoll = Mathf.Clamp(mouseOffset.x, -1f, 1f);
-        var wingsLevelRoll = transform.right.y;
-        var wingsLevelInfluence = Mathf.InverseLerp(0f, 10f, 0.01f);
-        roll = Mathf.Lerp(wingsLevelRoll, agressiveRoll, wingsLevelInfluence);
-
-        rb.velocity = thrust * transform.forward;
+        
     }
 
     void FixedUpdate()
