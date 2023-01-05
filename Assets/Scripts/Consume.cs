@@ -7,10 +7,14 @@ public class Consume : MonoBehaviour
 {
     public int score;
     public TextMeshProUGUI scoreGame;
+
+    public GameObject body;
+    private ExtendBody extendbody;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        extendbody = body.GetComponent<ExtendBody>();
     }
 
     // Update is called once per frame
@@ -25,6 +29,7 @@ public class Consume : MonoBehaviour
             Destroy(collision.gameObject);
             score++;
             scoreGame.text = "Score: " + score;
+            extendbody.ExtendSnake();
         }
     }
 }

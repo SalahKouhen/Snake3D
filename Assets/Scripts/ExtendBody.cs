@@ -9,14 +9,6 @@ public class ExtendBody : MonoBehaviour
     public GameObject bodySegmentPrefab;
     public Transform parentBody;
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ExtendSnake();
-        }
-    }
-
     public void ExtendSnake()
     {
         GameObject newSegment = Instantiate
